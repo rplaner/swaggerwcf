@@ -101,21 +101,29 @@ namespace SwaggerWcf.Support
 
                 //if a tag from either implementation or declaration is marked as not visible, skip it
                 List<SwaggerWcfTagAttribute> methodTags =
-                    implementation.GetCustomAttributes<SwaggerWcfTagAttribute>().ToList();
-                methodTags =
-                    methodTags.Concat(declaration.GetCustomAttributes<SwaggerWcfTagAttribute>()).ToList();
+                    implementation.GetCustomAttributes<SwaggerWcfTagAttribute>()
+                    .Concat(declaration.GetCustomAttributes<SwaggerWcfTagAttribute>())
+                    .Concat(implementation.DeclaringType.GetCustomAttributes<SwaggerWcfTagAttribute>()).ToList();
 
                 if (methodTags.Select(t => t.TagName).Any(HiddenTags.Contains))
                     continue;
 
+                //methodTags.Add(new SwaggerWcfTagAttribute(implementation.Name));
+                //methodTags.AddRange(implementation.DeclaringType.FullName.Split('.').Select(x => new SwaggerWcfTagAttribute(x)));
+
                 //find the WebGet/Invoke attributes, or skip if neither is present
                 var wg = declaration.GetCustomAttribute<WebGetAttribute>();
                 var wi = declaration.GetCustomAttribute<WebInvokeAttribute>();
-                if (wg == null && wi == null)
-                    continue;
+                //if (wg == null && wi == null)
+                    //continue;
 
-                string httpMethod = (wi == null) ? "GET" : wi.Method;
-                string uriTemplate = (wi == null) ? (wg.UriTemplate ?? "") : (wi.UriTemplate ?? "");
+                // By default, wcf webbinding are POST
+                string httpMethod = (wi == null) ? "POST" : wi.Method;
+                // By default, wcf webbinding are uses method name
+                string uriTemplate = 
+                    (wg == null && wi == null) 
+                        ? implementation.Name
+                        : (wi == null) ? (wg.UriTemplate ?? "") : (wi.UriTemplate ?? "");
 
                 //implementation description overrides interface description
                 string description =
@@ -123,17 +131,17 @@ namespace SwaggerWcf.Support
                     Helpers.GetCustomAttributeValue<string, SwaggerWcfPathAttribute>(declaration, "Description") ??
                     Helpers.GetCustomAttributeValue<string, DescriptionAttribute>(implementation, "Description") ??
                     Helpers.GetCustomAttributeValue<string, DescriptionAttribute>(declaration, "Description") ??
-                    "";
+                    implementation.Name;
 
                 string summary =
                     Helpers.GetCustomAttributeValue<string, SwaggerWcfPathAttribute>(implementation, "Summary") ??
                     Helpers.GetCustomAttributeValue<string, SwaggerWcfPathAttribute>(declaration, "Summary") ??
-                    "";
+                    implementation.Name;
 
                 string operationId =
                     Helpers.GetCustomAttributeValue<string, SwaggerWcfPathAttribute>(implementation, "OperationId") ??
                     Helpers.GetCustomAttributeValue<string, SwaggerWcfPathAttribute>(declaration, "OperationId") ??
-                    "";
+                    implementation.Name;
 
                 string externalDocsDescription =
                     Helpers.GetCustomAttributeValue<string, SwaggerWcfPathAttribute>(implementation,
@@ -260,6 +268,7 @@ namespace SwaggerWcf.Support
                     definitionsTypesList.Add(parameter.ParameterType);
                 }
                 typeFormat = new TypeFormat(ParameterType.Object,
+                                            //HttpUtility.UrlEncode(parameter.ParameterType.FullName));
                                             HttpUtility.HtmlEncode(parameter.ParameterType.FullName));
 
                 return new ParameterSchema
@@ -284,6 +293,9 @@ namespace SwaggerWcf.Support
             if (typeFormat.Type == ParameterType.Array)
             {
                 Type t = parameter.ParameterType.GetElementType();
+                if (t == null && parameter.ParameterType.IsGenericType)
+                    t = parameter.ParameterType.GenericTypeArguments.First();
+
                 param.Items = new ParameterItems
                 {
                     TypeFormat = new TypeFormat
@@ -334,6 +346,7 @@ namespace SwaggerWcf.Support
             }
             if (!contentTypes.Any())
                 contentTypes.AddRange(new[] {"application/json", "application/xml"});
+                //contentTypes.AddRange(new[] { "application/json" });
 
             return contentTypes;
         }
@@ -355,6 +368,7 @@ namespace SwaggerWcf.Support
             }
             if (!contentTypes.Any())
                 contentTypes.AddRange(new[] {"application/json", "application/xml"});
+                //contentTypes.AddRange(new[] { "application/json" });
 
             return contentTypes;
         }
@@ -416,10 +430,13 @@ namespace SwaggerWcf.Support
                     };
                 case ParameterType.Array:
                     Type t = type.GetElementType();
+                    if (t == null && type.IsGenericType)
+                        t = type.GenericTypeArguments.First();
                     definitionsTypesList.Add(t);
                     return new Schema
                     {
                         TypeFormat = typeFormat,
+                        //Ref = HttpUtility.UrlEncode(t.FullName)
                         Ref = HttpUtility.HtmlEncode(t.FullName)
                     };
                 default:

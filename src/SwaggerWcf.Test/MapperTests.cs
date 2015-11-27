@@ -268,7 +268,7 @@ namespace SwaggerWcf.Test
 			int Method(
 				[ParameterSettings(IsRequired = true)]string uno,
 				[ParameterSettings(IsRequired = true)]string dos,
-				[ParameterSettings(Description = "The third option."]string thRee);
+				[ParameterSettings(Description = "The third option.")]string thRee);
 
 			[Tag("SecretThings")]
 			[Response(500, "Just because.")]

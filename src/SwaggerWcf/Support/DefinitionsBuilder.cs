@@ -82,6 +82,15 @@ namespace SwaggerWcf.Support
                 ProcessProperties(definitionType, schema, hiddenTags, typesStack);
             }
 
+            if (schema.TypeFormat.Type == ParameterType.Array)
+            {
+                Type t = definitionType.GetElementType();
+                if (t == null && definitionType.IsGenericType)
+                    t = definitionType.GenericTypeArguments.First();
+
+                schema.Ref = t.FullName;
+            }
+
             return new Definition
             {
                 Schema = schema
