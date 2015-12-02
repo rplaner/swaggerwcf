@@ -1,0 +1,23 @@
+.container{position:relative;}
+.border-top{border-top: 1px solid rgba(0, 0, 0, .08);}
+body.page-index .content{max-width:80%;}
+body.page-index .swagger-section .sticky-nav [data-navigator]:before{display: none;}
+
+.content{}
+body.page-index .content .body{padding:0px 20px 20px 40px;}
+.body .subtitle{font-size: 17px;color: #68CC6A;font-style: italic;}
+
+#navbar-collapse{float:left;}
+.main-menu, .main-menu ul, .main-menu ul li{height:50px;line-height:50px;}
+
+.main-menu{margin:auto;position:absolute;left:0;right:0;width:270px;}
+.main-menu ul{list-style:none;float:left;overflow:hidden;box-shadow: 1px 0px 0px 0px #68CC6A, -1px 0px 0px 0px #68CC6A;padding:0 10px;}
+.main-menu ul li{float:left;margin:0 10px!important;}
+.main-menu ul li a{font-size:18px;text-decoration: none;}
+.main-menu ul li a:hover{text-decoration:underline;}
+
+
+body.page-index .swagger-section .heading{padding-left:40px;}
+.swagger-section .swagger-ui-wrap ul.topics{list-style: disc;}
+.swagger-section .swagger-ui-wrap ul.topics .list-topic{font-weight:bold;}
+.swagger-section .swagger-ui-wrap ul.topics ul{list-style: circle;}
