@@ -59,6 +59,12 @@ namespace SwaggerWcf
             if (woc == null)
                 return Stream.Null;
 
+            if (string.IsNullOrEmpty(content))
+            {
+                woc.OutgoingResponse.StatusCode = System.Net.HttpStatusCode.Redirect;
+                woc.OutgoingResponse.Location = "index2.html";
+                return null;
+            }
             if (string.IsNullOrWhiteSpace(content))
             {
                 string swaggerUrl = woc.IncomingRequest.UriTemplateMatch.BaseUri + "/swagger.json";
