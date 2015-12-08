@@ -23,9 +23,8 @@ $(document).ready(function(){
 				$(this).toggleClass("closed");
 				$(this).prev().toggleClass("closed");
 			})
-
 		});
-	$(".param-property[data-label='body']").attr("data-label","Body");
+		$(".param-property[data-label='body']").attr("data-label","Body");
 	},1000);
 
 });

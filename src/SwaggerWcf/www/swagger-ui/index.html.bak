@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API de Integração CoreCommerce</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--style type="text/css"></style-->
+
+    <link href="css/index.css" rel="stylesheet"/>
+    <link href='css/standalone.css' rel='stylesheet'/>
+    <link href='css/api-explorer.css' rel='stylesheet' type='text/css'/>
+    <link href="css/core.css" rel="stylesheet"/>
+
+    <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+    <script src='lib/custom.core.js' type='text/javascript'></script>
+    <script src='lib/custom.core.documentation.js' type='text/javascript'></script>
+    <script src='lib/bootstrap.min.js' type='text/javascript'></script>
+    <script src='lib/functions-on-page.js' type='text/javascript'></script>
+</head>
+
+<body class="page-docs page-index" style="zoom: 1;">
+<header class="site-header">
+    <nav role="navigation" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#navbar-collapse" class="navbar-toggle"><span
+                        class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                        class="icon-bar"></span><span class="icon-bar"></span></button>
+                <h1 class="navbar-brand"><a href="/"><span>swagger explorer</span></a></h1>
+            </div>
+            <div id="navbar-collapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="li-why"><span>Layer - API</span></li>
+                </ul>
+                <ul class="main-menu-mobile">
+                    <li class="active"><a href="index.html">Docs</a></li>
+                    <li><a href="reference.html">Reference</a></li>
+                </ul>
+            </div>
+            <div class="main-menu">
+                <ul>
+                    <li class="active"><a href="index.html">Docs</a></li>
+                    <li><a href="reference.html">Reference</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="content">
+    <div id="api2-explorer">
+       <div class="swagger-section page-docs" style="zoom: 1">
+          <div class="main-section">
+             <div id="swagger-ui-container" class="swagger-ui-wrap">
+                <div id="swagger_sidebar">
+                   <div class="sticky-nav-placeholder">
+                      <div class="sticky-nav">
+                         <div data-navigator="">
+                            <div data-resource="" label="Tools">
+                               <div class="item" data-tg-switch="">Swagger resource <span class="status"></span></div>
+                            </div>
+                            <div id="resources_nav">
+                               
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="resources_container" data-main-topic-label="Documentação Layer API">
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Introdução</h2>
+                        </div>
+                        <div class="body">
+                            <p class="subtitle">API de integração CoreCommerce</p>
+                            <p class="text">
+                                É possível integrar-se com o Core de várias maneiras, todas as operações estão disponíveis em nossa layer de integração e podem ser acessadas através dos seguintes protocolos:
+                            </p>
+                            <ul class="topics">
+                                <li>
+                                    <p class="list-topic">REST</p>
+                                    <ul>
+                                        <li>Você poderá realizar sua integração totalmente via os métodos padrões de POST/PUT/GET utilizando nossa WebAPI. A referência de todas as operações poderá ser vista aqui:<br> <a href="reference.html">[WEB API Reference]</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p class="list-topic">SOAP</p>
+                                    <ul>
+                                        <li>SOAP foi o primeiro método disponibilizado pela layer, os WSDLs das operações podem ser encontradas nos links abaixo:
+                                        <br /><a href="/v1/Catalog/API.svc" target="_soap">[Catalog]</a>&nbsp;
+                                        <a href="/v1/Configuration/API.svc" target="_soap">[Configuration]</a>&nbsp;
+                                        <a href="/v1/Inventory/API.svc" target="_soap">[Inventory]</a>&nbsp;
+                                        <a href="/v1/Payment/API.svc" target="_soap">[Payment]</a>&nbsp;
+                                        <a href="/v1/Pricing/API.svc" target="_soap">[Pricing]</a>&nbsp;
+                                        <a href="/v1/Promotion/API.svc" target="_soap">[Promotion]</a>&nbsp;
+                                        <a href="/v1/Queue/API.svc" target="_soap">[Queue]</a>&nbsp;
+                                        <a href="/v1/Sales/API.svc" target="_soap">[Sales]</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Autenticação</h2>
+                        </div>
+                        <div class="body">
+                            <p>Todas as requisições a API do CORE devem utilizar cabeçalhos do tipo <b>BASIC AUTHORIZATION</b>. Neste campo deve ser enviado a conta e senha de integração do cliente:
+                            <pre><code class="json">Authorization: Basic Y29udGE6c2VuaGE=</code></pre>
+                            </p>
+                            <p>
+                            O valor após a palavra Basic é uma chave Base64 da sua conta e senha. Para obter o valor, utilize o o comando base64 do linux:
+                            <pre>
+                                <code class="json">$ echo -n conta:senha | base64 
+                                Y29udGE6c2VuaGE=</code></pre><br />
+                            Ou através do site <a href="https://www.base64encode.org/" target="_blank">base64Encode</a>. Lembrando que se já estiver logado podera testar a <a href="reference.html">webapi</a> e capturar as informações através de um software como o <i>Fiddler</i>.
+                            </p>
+                           
+                        </div>
+                    </div>
+
+  
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Cenário Básico de Integração</h2>
+                        </div>
+                        <div class="body">
+                            <p class="text">Abaixo temos um esquema básico de integração com os métodos mais utilizados no CORE:</p>
+                            <a href="reference.html" target="_reference" title="Clique para testar os métodos online."><img src="images\Cenario-integracao.png" /></a>
+                </div>
+                    </div>
+<!-- 
+                <div class="content">
+                    <div class="heading">
+                            <h2 class="operation-title">Teste1</h2>
+                    </div>
+                    <div class="body">
+                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus, velit nec consequat tincidunt, purus nisi pretium arcu, vitae finibus lectus arcu nec sapien. Nam iaculis nisl eu ipsum suscipit, non suscipit purus pharetra. Morbi vel condimentum sapien, sit amet molestie felis. Nam in sem nisl. Etiam id lectus finibus, sagittis lorem sit amet, pulvinar magna. Pellentesque quis lobortis leo, quis iaculis justo. Cras fermentum nisi at massa dictum aliquet.</p>
+                        </div>
+                    </div>
+<!--                     
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Teste2</h2>
+                        </div>
+                        <div class="body">
+                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus, velit nec consequat tincidunt, purus nisi pretium arcu, vitae finibus lectus arcu nec sapien. Nam iaculis nisl eu ipsum suscipit, non suscipit purus pharetra. Morbi vel condimentum sapien, sit amet molestie felis. Nam in sem nisl. Etiam id lectus finibus, sagittis lorem sit amet, pulvinar magna. Pellentesque quis lobortis leo, quis iaculis justo. Cras fermentum nisi at massa dictum aliquet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Teste3</h2>
+                        </div>
+                        <div class="body">
+                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus, velit nec consequat tincidunt, purus nisi pretium arcu, vitae finibus lectus arcu nec sapien. Nam iaculis nisl eu ipsum suscipit, non suscipit purus pharetra. Morbi vel condimentum sapien, sit amet molestie felis. Nam in sem nisl. Etiam id lectus finibus, sagittis lorem sit amet, pulvinar magna. Pellentesque quis lobortis leo, quis iaculis justo. Cras fermentum nisi at massa dictum aliquet.</p>
+                        </div>
+                    </div>
+                                     
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Teste4</h2>
+                        </div>
+                        <div class="body">
+                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus, velit nec consequat tincidunt, purus nisi pretium arcu, vitae finibus lectus arcu nec sapien. Nam iaculis nisl eu ipsum suscipit, non suscipit purus pharetra. Morbi vel condimentum sapien, sit amet molestie felis. Nam in sem nisl. Etiam id lectus finibus, sagittis lorem sit amet, pulvinar magna. Pellentesque quis lobortis leo, quis iaculis justo. Cras fermentum nisi at massa dictum aliquet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Teste5</h2>
+                        </div>
+                        <div class="body">
+                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus, velit nec consequat tincidunt, purus nisi pretium arcu, vitae finibus lectus arcu nec sapien. Nam iaculis nisl eu ipsum suscipit, non suscipit purus pharetra. Morbi vel condimentum sapien, sit amet molestie felis. Nam in sem nisl. Etiam id lectus finibus, sagittis lorem sit amet, pulvinar magna. Pellentesque quis lobortis leo, quis iaculis justo. Cras fermentum nisi at massa dictum aliquet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="operation-title">Teste6</h2>
+                        </div>
+                        <div class="body">
+                            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus, velit nec consequat tincidunt, purus nisi pretium arcu, vitae finibus lectus arcu nec sapien. Nam iaculis nisl eu ipsum suscipit, non suscipit purus pharetra. Morbi vel condimentum sapien, sit amet molestie felis. Nam in sem nisl. Etiam id lectus finibus, sagittis lorem sit amet, pulvinar magna. Pellentesque quis lobortis leo, quis iaculis justo. Cras fermentum nisi at massa dictum aliquet.</p>
+                    </div>
+                </div>
+                    /-->
+
+
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+</section>
+</body>
+</html>
+

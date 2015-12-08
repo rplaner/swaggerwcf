@@ -609,7 +609,6 @@
 
 @media (min-width: 992px) {
     .swagger-section .token-generator {
-        padding-top: 20px;
         padding-right: 20px;
         box-shadow: none;
         background: #f3f3f4;
@@ -811,7 +810,8 @@
 }
 
 .swagger-section .token-generator .scope-selector {
-    padding: 15px 0
+    padding: 15px 0;
+    display: none;
 }
 
 .swagger-section .token-generator .scope-selector:after {
@@ -868,7 +868,6 @@
     .swagger-section .token-generator label {
         color: #5c666f;
         font-size: 13px;
-        margin-bottom: 15px
     }
 }
 
@@ -1488,14 +1487,16 @@ body {
 }
 
 @media (min-width: 992px) {
-    .swagger-section #resources_container {
+    .swagger-section #resources_container,
+    .swagger-section .resources_container {
         width: 100%;
         padding-left: 290px
     }
 }
 
 @media (min-width: 1400px) {
-    .swagger-section #resources_container {
+    .swagger-section #resources_container,
+    .swagger-section .resources_container {
         padding-left: 320px
     }
 }
